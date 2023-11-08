@@ -12,35 +12,30 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     jq \
     lsb-release \
     software-properties-common
-curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-###################################
-# Prerequisites
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-# Update the list of packages
-sudo apt-get update
 
-# Install pre-requisite packages.
-sudo apt-get install -y wget
+RUN apt-get update
+ 
 
-# Get the version of Debian
-source /etc/os-release
+RUN apt-get install -y wget apt-transport-https software-properties-common
+ 
 
-# Download the Microsoft repository GPG keys
-wget -q https://packages.microsoft.com/config/debian/$VERSION_ID/packages-microsoft-prod.deb
+RUN wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
+ 
 
-# Register the Microsoft repository GPG keys
-sudo dpkg -i packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+ 
 
-# Delete the the Microsoft repository GPG keys file
-rm packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+ 
 
-# Update the list of packages after we added packages.microsoft.com
-sudo apt-get update
+RUN apt-get update
+ 
+RUN apt-get install -y powershell
+ 
 
-###################################
-# Install PowerShell
-sudo apt-get install -y powershell
 
 
 
