@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 
-
+RUN version_id=$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | tr -d '"')
  
 
 RUN wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
