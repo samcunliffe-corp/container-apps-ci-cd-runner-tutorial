@@ -14,24 +14,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommend
     software-properties-common
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-RUN print_header "Updating package list..."
-RUN apt-get update
- 
-RUN print_header "Installing PowerShell Core Prerequisites..."
-RUN apt-get install -y wget apt-transport-https software-properties-common
- 
-RUN print_header "Downloading the Microsoft repo keys..."
-RUN wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
- 
-RUN print_header "Registering the Microsoft repo keys..."
-RUN dpkg -i packages-microsoft-prod.deb
- 
-RUN print_header "Deleting the Microsoft repo keys file..."
-RUN rm packages-microsoft-prod.deb
- 
-RUN print_header "Updating the list of packages after adding packages.microsoft.com..."
-RUN apt-get update
- 
 RUN print_header "Installing PowerShell Core..."
 RUN apt-get install -y powershell
  
